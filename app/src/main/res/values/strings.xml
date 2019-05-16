@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Registration App</string>
+
+    <string-array name="spinner_list_item_array">
+        <item>Aarzoo</item>
+        <item>Akshat</item>
+        <item>Anish</item>
+        <item>Avinash</item>
+        <item>Chinmaya</item>
+        <item>Dinaaz</item>
+        <item>Gemini</item>
+        <item>Harsh</item>
+        <item>Iffat</item>
+        <item>Irfan</item>
+        <item>Kamalneet</item>
+        <item>Mini</item>
+        <item>Naina</item>
+        <item>Naushina</item>
+        <item>Reeta</item>
+        <item>Rinku</item>
+        <item>Subash</item>
+        <item>Sushma</item>
+        <item>Jay</item>
+        <item>Unnati</item>
+
+    </string-array>
 </resources>
