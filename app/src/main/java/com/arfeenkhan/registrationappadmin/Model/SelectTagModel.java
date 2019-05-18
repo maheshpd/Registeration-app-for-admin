@@ -1,11 +1,13 @@
 package com.arfeenkhan.registrationappadmin.Model;
 
+import java.util.ArrayList;
+
 public class SelectTagModel {
 
-    String name, place, tagno, time, ctf, date,Tf;
+    String name, place, tagno, time, ctf, date, Tf;
+    ArrayList<SessionNameModel> list;
 
-
-    public SelectTagModel(String name, String place, String tagno, String time, String ctf, String date, String tf) {
+    public SelectTagModel(String name, String place, String tagno, String time, String ctf, String date, String tf, ArrayList<SessionNameModel> list) {
         this.name = name;
         this.place = place;
         this.tagno = tagno;
@@ -13,6 +15,22 @@ public class SelectTagModel {
         this.ctf = ctf;
         this.date = date;
         Tf = tf;
+        this.list = list;
+    }
+
+    //    public SelectTagModel(String name, String place, String tagno, String time, String ctf, String date, String tf) {
+//        this.name = name;
+//        this.place = place;
+//        this.tagno = tagno;
+//        this.time = time;
+//        this.ctf = ctf;
+//        this.date = date;
+//        Tf = tf;
+//    }
+
+
+    public ArrayList<SessionNameModel> getList() {
+        return list;
     }
 
     public String getName() {

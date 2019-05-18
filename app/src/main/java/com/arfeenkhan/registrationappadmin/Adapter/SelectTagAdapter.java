@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.arfeenkhan.registrationappadmin.Activity.AddPersonName;
 import com.arfeenkhan.registrationappadmin.Activity.UserDetails;
 import com.arfeenkhan.registrationappadmin.Model.SelectTagModel;
 import com.arfeenkhan.registrationappadmin.Model.SessionNameModel;
@@ -45,6 +45,7 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
     String totalnoUrl = "http://magicconversion.com/barcodescanner/getData.php";
     String sessionUrl = "http://magicconversion.com/barcodescanner/getSessionName.php";
     private String updateurl = "http://magicconversion.com/barcodescanner/updatetgdata.php";
+    private String resetUrl = "http://magicconversion.com/barcodescanner/restallocation.php";
     ArrayList<SessionNameModel> sessionlist = new ArrayList<>();
     StringRequest sessionrequest, sessionrequest1;
     int total_count;
@@ -55,10 +56,16 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
     Dialog edtDialog;
     PersonNameAdapter personNameAdapter;
 
-    public SelectTagAdapter(Context ctx, ArrayList<SelectTagModel> list) {
+    public SelectTagAdapter(Context ctx, ArrayList<SelectTagModel> list, ArrayList<SessionNameModel> sessionlist) {
         this.ctx = ctx;
         this.list = list;
+        this.sessionlist = sessionlist;
     }
+
+//    public SelectTagAdapter(Context ctx, ArrayList<SelectTagModel> list) {
+//        this.ctx = ctx;
+//        this.list = list;
+//    }
 
     @Override
     public TagViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -77,9 +84,12 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
         holder.mtags.setText(stm.getTagno());
         holder.mdate.setText(stm.getDate());
 
-        PersonNameAdapter adapter = new PersonNameAdapter(sessionlist, ctx);
+        sessionlist = list.get(position).getList();
 
-//        holder.allocationname
+        PersonNameAdapter adapter = new PersonNameAdapter(sessionlist, ctx);
+        holder.allocationname.setHasFixedSize(true);
+        holder.allocationname.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
+        holder.allocationname.setAdapter(adapter);
 
 
         final String place = holder.mplace.getText().toString();
@@ -88,7 +98,7 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
         final String time = holder.mtime.getText().toString();
         final String date = holder.mdate.getText().toString();
         final String tag = holder.mtags.getText().toString();
-
+        String tf = list.get(position).getTf();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +109,7 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
                 Common.ctf = holder.mctf.getText().toString();
                 Common.tagno = holder.mtags.getText().toString();
                 Common.sdate = holder.mdate.getText().toString();
-                tf = list.get(position).getTf();
+                Common.tf = list.get(position).getTf();
 
 
                 Intent mainIntent = new Intent(ctx, UserDetails.class);
@@ -135,6 +145,12 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
                         UpdateView();
                     }
                 });
+                builder.setNeutralButton("Reset", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        RestTag(tag);
+                    }
+                });
                 AlertDialog dialog = builder.create();
                 dialog.show();
                 return true;
@@ -155,6 +171,38 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
         }
 
     }
+
+    private void RestTag(final String tagno) {
+
+        RequestQueue queue = Volley.newRequestQueue(ctx);
+        sessionrequest1 = new StringRequest(Request.Method.POST, resetUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject array = new JSONObject(response);
+                    String message = array.getString("tag");
+                    Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("tagnum", tagno);
+                return params;
+            }
+        };
+        queue.add(sessionrequest1);
+    }
+
+
 //        if (AddPersonName.sessionlist.size() == 0) {
 //            holder.itemView.setBackgroundColor(Color.RED);
 //        } else {
@@ -232,8 +280,7 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
                         SessionNameModel snm = new SessionNameModel(id, name);
                         sessionlist.add(snm);
                     }
-
-                    personNameAdapter.notifyDataSetChanged();
+//                    personNameAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
