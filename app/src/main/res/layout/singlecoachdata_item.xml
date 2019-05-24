@@ -8,228 +8,93 @@
     android:elevation="3dp"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <android.support.v7.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal"
-        android:weightSum="2"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#DD8950"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:text="Coach Name"
-                android:textColor="@android:color/black"
-                android:textSize="17sp" />
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/coachname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
+                android:padding="5dp"
                 android:text="Coach Name"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#123" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#FFDD8950"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:text="Customer name"
-                android:textColor="@android:color/black"
-                android:textSize="17sp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp"
+                android:padding="5dp"
                 android:text="User name"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="17sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="#123"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="1dp"
-        android:background="#FFDD8950"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintEnd_toEndOf="@+id/divider2"
-        app:layout_constraintStart_toStartOf="@+id/divider2"
-        app:layout_constraintTop_toBottomOf="@+id/divider2">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:text="Unique Id"
-                android:textColor="@android:color/black"
-                android:textSize="17sp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coachname" />
 
             <TextView
                 android:id="@+id/uniqueno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp"
+                android:padding="5dp"
                 android:text="Unique Id"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="17sp" />
-        </LinearLayout>
-        <View
-            android:id="@+id/divider1"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#123" />
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:text="Customer Phone No"
-                android:textColor="@android:color/black"
-                android:textSize="17sp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/username" />
 
             <TextView
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp"
+                android:autoLink="phone"
+                android:padding="5dp"
                 android:text="User Phone"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="17sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#123"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="1dp"
-        android:background="#FFDD8950"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintEnd_toEndOf="@+id/divider4"
-        app:layout_constraintStart_toStartOf="@+id/divider4"
-        app:layout_constraintTop_toBottomOf="@+id/divider4">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:text="Date"
-                android:textColor="@android:color/black"
-                android:textSize="17sp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uniqueno" />
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp"
+                android:padding="5dp"
                 android:text="Date"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="#123" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:text="Time"
-                android:textColor="@android:color/black"
-                android:textSize="17sp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone" />
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp"
+                android:padding="5dp"
                 android:text="Time"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

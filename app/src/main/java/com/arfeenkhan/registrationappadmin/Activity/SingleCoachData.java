@@ -1,10 +1,12 @@
 package com.arfeenkhan.registrationappadmin.Activity;
 
 import android.app.ProgressDialog;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -29,7 +31,7 @@ import java.util.Map;
 
 public class SingleCoachData extends AppCompatActivity {
 
-    private RecyclerView singleCoachData;
+    //    private RecyclerView singleCoachData;
     private TextView textView;
     private String singleCoachDataUrl = "http://magicconversion.com/barcodescanner/singleuserdata.php";
     private SingleCoachDataAdapter adapter;
@@ -40,6 +42,10 @@ public class SingleCoachData extends AppCompatActivity {
 
     ArrayList<String> listofpeople = new ArrayList<>();
 
+    SwipeRefreshLayout swipeRefreshLayout;
+    GridView SingleDataView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +55,18 @@ public class SingleCoachData extends AppCompatActivity {
         getData();
 
         textView = findViewById(R.id.total_no_person);
-        singleCoachData = findViewById(R.id.single_coach_recycler_data);
+        swipeRefreshLayout = findViewById(R.id.swipeLayout);
+        SingleDataView = findViewById(R.id.single_coach_recycler_data);
         adapter = new SingleCoachDataAdapter(list, this);
-        LinearLayoutManager lm = new LinearLayoutManager(this);
-        lm.setOrientation(LinearLayoutManager.VERTICAL);
-        singleCoachData.setLayoutManager(lm);
-        singleCoachData.setHasFixedSize(true);
-        singleCoachData.setAdapter(adapter);
+        SingleDataView.setAdapter(adapter);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void getData() {

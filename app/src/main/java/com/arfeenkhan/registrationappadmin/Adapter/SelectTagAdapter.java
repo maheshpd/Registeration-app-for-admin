@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,8 +34,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.arfeenkhan.registrationappadmin.util.Common.tf;
 
 public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagViewHolder> {
     Context ctx;
@@ -62,15 +59,15 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
         this.sessionlist = sessionlist;
     }
 
-//    public SelectTagAdapter(Context ctx, ArrayList<SelectTagModel> list) {
-//        this.ctx = ctx;
-//        this.list = list;
-//    }
+    public SelectTagAdapter(Context ctx, ArrayList<SelectTagModel> list) {
+        this.ctx = ctx;
+        this.list = list;
+    }
 
     @Override
     public TagViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.select_tag_item, parent, false);
-        getSessionName();
+//        getSessionName();
         return new TagViewHolder(view);
     }
 
@@ -98,7 +95,16 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
         final String time = holder.mtime.getText().toString();
         final String date = holder.mdate.getText().toString();
         final String tag = holder.mtags.getText().toString();
+
         String tf = list.get(position).getTf();
+
+        if (tf.equals("True")) {
+            holder.itemView.setBackgroundColor(Color.GREEN);
+        } else {
+            holder.itemView.setBackgroundColor(Color.RED);
+        }
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,11 +164,11 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
         });
 
 
-        if (sessionlist.size() == 0) {
-            holder.itemView.setBackgroundColor(Color.RED);
-        } else {
-            holder.itemView.setBackgroundColor(Color.GREEN);
-        }
+//        if (sessionlist.size() == 0) {
+//            holder.itemView.setBackgroundColor(Color.RED);
+//        } else {
+//            holder.itemView.setBackgroundColor(Color.GREEN);
+//        }
 
         if (tf.equals("True")) {
             holder.itemView.setBackgroundColor(Color.WHITE);
@@ -265,32 +271,32 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
         }
     }
 
-    public void getSessionName() {
-        sessionlist.clear();
-        RequestQueue queue = Volley.newRequestQueue(ctx);
-        sessionrequest = new StringRequest(Request.Method.POST, sessionUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray arr = new JSONArray(response);
-                    for (int i = 0; i < arr.length(); i++) {
-                        JSONObject c = arr.getJSONObject(i);
-                        String name = c.getString("name");
-                        String id = c.getString("id");
-                        SessionNameModel snm = new SessionNameModel(id, name);
-                        sessionlist.add(snm);
-                    }
-//                    personNameAdapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        queue.add(sessionrequest);
-    }
+//    public void getSessionName() {
+////        sessionlist.clear();
+//        RequestQueue queue = Volley.newRequestQueue(ctx);
+//        sessionrequest = new StringRequest(Request.Method.POST, sessionUrl, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONArray arr = new JSONArray(response);
+//                    for (int i = 0; i < arr.length(); i++) {
+//                        JSONObject c = arr.getJSONObject(i);
+//                        String name = c.getString("name");
+//                        String id = c.getString("id");
+//                        SessionNameModel snm = new SessionNameModel(id, name);
+//                        sessionlist.add(snm);
+//                    }
+////                    personNameAdapter.notifyDataSetChanged();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//            }
+//        });
+//        queue.add(sessionrequest);
+//    }
 }
 

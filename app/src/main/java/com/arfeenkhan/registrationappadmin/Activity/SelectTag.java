@@ -57,14 +57,14 @@ public class SelectTag extends AppCompatActivity {
         taglist = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
         place = getIntent().getExtras().get("place").toString();
-//        getData();
+        getData();
 
-        getJsonData();
+//        getJsonData();
 
         swipeRefreshLayout = findViewById(R.id.swipeLayout);
         tagRecycler = findViewById(R.id.select_tags);
-//        tagAdapter = new SelectTagAdapter(this, taglist);
-        tagAdapter = new SelectTagAdapter(this, taglist, sessionlist);
+        tagAdapter = new SelectTagAdapter(this, taglist);
+//        tagAdapter = new SelectTagAdapter(this, taglist, sessionlist);
 
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -75,50 +75,152 @@ public class SelectTag extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                getData();
-                getJsonData();
+                getData();
+//                getJsonData();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
-    private void getJsonData() {
+//    private void getJsonData() {
+//        progressDialog.setMessage("Please wait...");
+//        progressDialog.setCanceledOnTouchOutside(false);
+//        progressDialog.show();
+//        taglist.clear();
+//        String url = "http://magicconversion.com/barcodescanner/innerjoin.php";
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//
+//        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    String question = jsonObject.getString("question");
+//                    JSONArray array = new JSONArray(question);
+//                    for (int i = 0; i < array.length(); i++) {
+//                        JSONObject jsonObject1 = array.getJSONObject(i);
+//                        String date = jsonObject1.getString("date");
+//                        String tag = jsonObject1.getString("tagno");
+//                        String place = jsonObject1.getString("place");
+//                        String name = jsonObject1.getString("name");
+//                        String ctf = jsonObject1.getString("ctf");
+//                        String time = jsonObject1.getString("time");
+//                        String tf = jsonObject1.getString("TF");
+//                        JSONArray jsonArray1 = jsonObject1.getJSONArray("session_name");
+//                        for (int j = 0; j < jsonArray1.length(); j++) {
+//                            JSONObject jsonObject2 = jsonArray1.getJSONObject(j);
+//                            String sessionname = jsonObject2.getString("name");
+//                            SessionNameModel sessionNameModel = new SessionNameModel("id", sessionname);
+//                            sessionlist.add(sessionNameModel);
+//                        }
+//
+//                        SelectTagModel stm = new SelectTagModel(name, place, tag, time, ctf, date, tf,sessionlist);
+//                        taglist.add(stm);
+//                        progressDialog.dismiss();
+//                        tagAdapter.notifyDataSetChanged();
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> param = new HashMap<>();
+//                param.put("place", place);
+//                return param;
+//            }
+//        };
+//
+////        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+////            @Override
+////            public void onResponse(JSONObject response) {
+////                try {
+////                    JSONArray jsonArray = response.getJSONArray("question");
+////                    for (int i = 0; i < jsonArray.length(); i++) {
+////                        JSONObject data = jsonArray.getJSONObject(i);
+////                        String tag = data.getString("tagno");
+////                        String place = data.getString("place");
+////                        String name = data.getString("name");
+////                        String ctf = data.getString("ctf");
+////                        String time = data.getString("time");
+////                        String date = data.getString("date");
+////                        String tf = data.getString("tf");
+////
+////                        JSONArray jsonArray1 = data.getJSONArray("session_name");
+////                        for (int j = 0; j < jsonArray1.length(); j++) {
+////                            JSONObject jsonObject = jsonArray1.getJSONObject(j);
+////                            String sessionname = jsonObject.getString("name");
+////                            SessionNameModel sessionNameModel = new SessionNameModel("", sessionname);
+////                            sessionlist.add(sessionNameModel);
+////                        }
+////
+////                        SelectTagModel stm = new SelectTagModel(name, place, tag, time, ctf, date, tf);
+////                        taglist.add(stm);
+////                        progressDialog.dismiss();
+////
+////                    }
+////                    tagAdapter.notifyDataSetChanged();
+////                } catch (JSONException e) {
+////                    e.printStackTrace();
+////                }
+////            }
+////        }, new Response.ErrorListener() {
+////            @Override
+////            public void onErrorResponse(VolleyError error) {
+////                error.printStackTrace();
+////            }
+////        }) {
+////            @Override
+////            protected Map<String, String> getParams() throws AuthFailureError {
+////                Map<String, String> params = new HashMap<>();
+////                params.put("place", place);
+////                return params;
+////
+////            }
+////        };
+//        queue.add(sr);
+//    }
+
+    private void getData() {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-        taglist.clear();
-        String url = "http://magicconversion.com/barcodescanner/innerjoin.php";
-        RequestQueue queue = Volley.newRequestQueue(this);
 
-        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest sr = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String question = jsonObject.getString("question");
-                    JSONArray array = new JSONArray(question);
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject jsonObject1 = array.getJSONObject(i);
-                        String date = jsonObject1.getString("date");
-                        String tag = jsonObject1.getString("tagno");
-                        String place = jsonObject1.getString("place");
-                        String name = jsonObject1.getString("name");
-                        String ctf = jsonObject1.getString("ctf");
-                        String time = jsonObject1.getString("time");
-                        String tf = jsonObject1.getString("TF");
-                        JSONArray jsonArray1 = jsonObject1.getJSONArray("session_name");
-                        for (int j = 0; j < jsonArray1.length(); j++) {
-                            JSONObject jsonObject2 = jsonArray1.getJSONObject(j);
-                            String sessionname = jsonObject2.getString("name");
-                            SessionNameModel sessionNameModel = new SessionNameModel("id", sessionname);
-                            sessionlist.add(sessionNameModel);
-                        }
-
-                        SelectTagModel stm = new SelectTagModel(name, place, tag, time, ctf, date, tf,sessionlist);
+                    JSONArray arr = new JSONArray(response);
+                    JSONObject c = null;
+                    for (int i = 0; i < arr.length(); i++) {
+                        c = arr.getJSONObject(i);
+                        String tag = c.getString("tagno");
+                        String place = c.getString("place");
+                        String name = c.getString("name");
+                        String ctf = c.getString("ctf");
+                        String time = c.getString("time");
+                        String date = c.getString("date");
+                        String tf = c.getString("tf");
+                        SelectTagModel stm = new SelectTagModel(name, place, tag, time, ctf, date, tf);
                         taglist.add(stm);
                         progressDialog.dismiss();
                         tagAdapter.notifyDataSetChanged();
+
                     }
+
+//                    JSONObject c1=arr.getJSONObject(0);
+//                    String message = c1.getString("message");
+//
+////                    String message = c.getString("message");
+//                    Toast.makeText(SelectTags.this, message, Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -132,117 +234,15 @@ public class SelectTag extends AppCompatActivity {
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> param = new HashMap<>();
-                param.put("place", place);
-                return param;
+                Map<String, String> params = new HashMap<>();
+                params.put("place", place);
+                return params;
+
             }
         };
 
-//        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                try {
-//                    JSONArray jsonArray = response.getJSONArray("question");
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject data = jsonArray.getJSONObject(i);
-//                        String tag = data.getString("tagno");
-//                        String place = data.getString("place");
-//                        String name = data.getString("name");
-//                        String ctf = data.getString("ctf");
-//                        String time = data.getString("time");
-//                        String date = data.getString("date");
-//                        String tf = data.getString("tf");
-//
-//                        JSONArray jsonArray1 = data.getJSONArray("session_name");
-//                        for (int j = 0; j < jsonArray1.length(); j++) {
-//                            JSONObject jsonObject = jsonArray1.getJSONObject(j);
-//                            String sessionname = jsonObject.getString("name");
-//                            SessionNameModel sessionNameModel = new SessionNameModel("", sessionname);
-//                            sessionlist.add(sessionNameModel);
-//                        }
-//
-//                        SelectTagModel stm = new SelectTagModel(name, place, tag, time, ctf, date, tf);
-//                        taglist.add(stm);
-//                        progressDialog.dismiss();
-//
-//                    }
-//                    tagAdapter.notifyDataSetChanged();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                error.printStackTrace();
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("place", place);
-//                return params;
-//
-//            }
-//        };
-        queue.add(sr);
-    }
 
-//    private void getData() {
-//        progressDialog.setMessage("Please wait...");
-//        progressDialog.setCanceledOnTouchOutside(false);
-//        progressDialog.show();
-//
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        StringRequest sr = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                try {
-//                    JSONArray arr = new JSONArray(response);
-//                    JSONObject c = null;
-//                    for (int i = 0; i < arr.length(); i++) {
-//                        c = arr.getJSONObject(i);
-//                        String tag = c.getString("tagno");
-//                        String place = c.getString("place");
-//                        String name = c.getString("name");
-//                        String ctf = c.getString("ctf");
-//                        String time = c.getString("time");
-//                        String date = c.getString("date");
-//                        String tf = c.getString("tf");
-//                        SelectTagModel stm = new SelectTagModel(name, place, tag, time, ctf, date, tf);
-//                        taglist.add(stm);
-//                        progressDialog.dismiss();
-//                        tagAdapter.notifyDataSetChanged();
-//
-//                    }
-//
-////                    JSONObject c1=arr.getJSONObject(0);
-////                    String message = c1.getString("message");
-////
-//////                    String message = c.getString("message");
-////                    Toast.makeText(SelectTags.this, message, Toast.LENGTH_SHORT).show();
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("place", place);
-//                return params;
-//
-//            }
-//        };
-//
-//
-//        queue.add(sr);
-//
-//    }
+        queue.add(sr);
+
+    }
 }
