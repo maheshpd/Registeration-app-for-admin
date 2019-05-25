@@ -38,20 +38,11 @@ import java.util.Map;
 public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagViewHolder> {
     Context ctx;
     ArrayList<SelectTagModel> list;
-    ArrayList<String> no0fpeoplelist = new ArrayList<>();
-    String totalnoUrl = "http://magicconversion.com/barcodescanner/getData.php";
-    String sessionUrl = "http://magicconversion.com/barcodescanner/getSessionName.php";
-    private String updateurl = "http://magicconversion.com/barcodescanner/updatetgdata.php";
-    private String resetUrl = "http://magicconversion.com/barcodescanner/restallocation.php";
+    String updateurl = "http://magicconversion.com/barcodescanner/updatetgdata.php";
+    String resetUrl = "http://magicconversion.com/barcodescanner/restallocation.php";
     ArrayList<SessionNameModel> sessionlist = new ArrayList<>();
-    StringRequest sessionrequest, sessionrequest1;
-    int total_count;
-
-    String tag = "", yes = "";
-    //    SessionNameAdapter allocationadapter;
-    RecyclerView coachname;
-    Dialog edtDialog;
-    PersonNameAdapter personNameAdapter;
+    StringRequest sessionrequest1;
+    String yes;
 
     public SelectTagAdapter(Context ctx, ArrayList<SelectTagModel> list, ArrayList<SessionNameModel> sessionlist) {
         this.ctx = ctx;
@@ -67,7 +58,6 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
     @Override
     public TagViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.select_tag_item, parent, false);
-//        getSessionName();
         return new TagViewHolder(view);
     }
 
@@ -81,14 +71,6 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
         holder.mtags.setText(stm.getTagno());
         holder.mdate.setText(stm.getDate());
 
-        sessionlist = list.get(position).getList();
-
-        PersonNameAdapter adapter = new PersonNameAdapter(sessionlist, ctx);
-        holder.allocationname.setHasFixedSize(true);
-        holder.allocationname.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
-        holder.allocationname.setAdapter(adapter);
-
-
         final String place = holder.mplace.getText().toString();
         final String name = holder.mname.getText().toString();
         final String ctf = holder.mctf.getText().toString();
@@ -97,9 +79,15 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
         final String tag = holder.mtags.getText().toString();
 
         String tf = list.get(position).getTf();
+        String sessionnane = stm.getSessionname();
 
-        if (tf.equals("True")) {
+        if (sessionnane.equals("True")) {
             holder.itemView.setBackgroundColor(Color.GREEN);
+            if (tf.equals("True")) {
+                holder.itemView.setBackgroundColor(Color.WHITE);
+            } else {
+                holder.itemView.setBackgroundColor(Color.GREEN);
+            }
         } else {
             holder.itemView.setBackgroundColor(Color.RED);
         }
@@ -162,20 +150,6 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
                 return true;
             }
         });
-
-
-//        if (sessionlist.size() == 0) {
-//            holder.itemView.setBackgroundColor(Color.RED);
-//        } else {
-//            holder.itemView.setBackgroundColor(Color.GREEN);
-//        }
-
-        if (tf.equals("True")) {
-            holder.itemView.setBackgroundColor(Color.WHITE);
-        } else {
-            holder.itemView.setBackgroundColor(Color.GREEN);
-        }
-
     }
 
     private void RestTag(final String tagno) {

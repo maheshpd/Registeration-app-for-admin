@@ -144,12 +144,6 @@ public class UserDetails extends AppCompatActivity {
 
         //End Allocation Spinner
 
-        if (Common.tf.equals("False")) {
-            addSessionName.setVisibility(View.INVISIBLE);
-        } else if (Common.tf.equals("True")) {
-            addSessionName.setVisibility(View.VISIBLE);
-        }
-
         addSessionName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
