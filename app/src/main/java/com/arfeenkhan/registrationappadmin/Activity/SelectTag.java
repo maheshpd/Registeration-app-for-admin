@@ -192,7 +192,7 @@ public class SelectTag extends AppCompatActivity {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-
+        taglist.clear();
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
             @Override
