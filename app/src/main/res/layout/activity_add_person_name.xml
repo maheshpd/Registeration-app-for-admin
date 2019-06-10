@@ -15,11 +15,22 @@
         android:src="@drawable/ak_logo" />
 
     <Spinner
+    android:id="@+id/user_name1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/logo"
+    android:layout_margin="20dp"
+    android:visibility="gone" />
+
+    <AutoCompleteTextView
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
-        android:layout_margin="20dp" />
+        android:layout_margin="20dp"
+        android:imeOptions="actionDone"
+        android:completionThreshold="1"
+        android:hint="Select allocation name" />
 
     <!--<EditText-->
     <!--android:id="@+id/user_name"-->

@@ -1,13 +1,16 @@
 package com.arfeenkhan.registrationappadmin.Activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,6 +37,7 @@ public class SingleCoachData extends AppCompatActivity {
     //    private RecyclerView singleCoachData;
     private TextView textView;
     private String singleCoachDataUrl = "http://magicconversion.com/barcodescanner/singleuserdata.php";
+    String deleteEventPeople = "http://magicconversion.com/barcodescanner/deleteEventPeople.php";
     private SingleCoachDataAdapter adapter;
     private ArrayList<SignleCoachDataModel> list = new ArrayList<>();
     ProgressDialog mdialog;
@@ -45,6 +49,7 @@ public class SingleCoachData extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     GridView SingleDataView;
 
+    String deleteId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,66 @@ public class SingleCoachData extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+
+        SingleDataView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SingleCoachData.this);
+                builder.setTitle("Delete");
+                builder.setMessage("Do you want to Delete");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteId = list.get(position).getId();
+                        delete();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+                return true;
+            }
+        });
+
+    }
+
+    private void delete() {
+        RequestQueue queue = Volley.newRequestQueue(SingleCoachData.this);
+        StringRequest sr = new StringRequest(Request.Method.POST, deleteEventPeople, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arr = new JSONObject(response);
+                    for (int i = 0; i < arr.length(); i++) {
+                        String message = arr.getString("tag");
+                        Toast.makeText(SingleCoachData.this, message, Toast.LENGTH_SHORT).show();
+                        getData();
+                    }
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", deleteId);
+                return params;
+            }
+        };
+
+        queue.add(sr);
     }
 
     private void getData() {

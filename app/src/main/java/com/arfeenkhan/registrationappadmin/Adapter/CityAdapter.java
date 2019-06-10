@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.arfeenkhan.registrationappadmin.Model.CityModel;
 import com.arfeenkhan.registrationappadmin.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,7 @@ public class CityAdapter extends BaseAdapter {
         TextView cityname = convertView.findViewById(R.id.cityname);
         CityModel cityModel = citylist.get(position);
         cityname.setText(cityModel.getName());
+        Glide.with(convertView.getContext()).load(citylist.get(position).getImage()).apply(new RequestOptions().placeholder(R.drawable.mumbai)).into(imageView);
         return convertView;
     }
 }

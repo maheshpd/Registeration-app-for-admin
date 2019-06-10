@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -45,18 +46,29 @@ public class AddPersonName extends AppCompatActivity {
 
     RecyclerView sessionRecycler;
     String sessionUrl = "http://magicconversion.com/barcodescanner/getSessionName.php";
-    String allocationnameUrl = "http://magicconversion.com/barcodescanner/getAllocationName.php";
+    String  allocationnameUrl = "http://magicconversion.com/barcodescanner/getAllocationName.php";
     SwipeRefreshLayout swipeRefreshLayout;
     ArrayList<String> allocationnamelist = new ArrayList<>();
+
+    AutoCompleteTextView autoSuggestion;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_person_name);
 
-        spinner = findViewById(R.id.user_name);
+        spinner = findViewById(R.id.user_name1);
+        autoSuggestion = findViewById(R.id.user_name);
         add = findViewById(R.id.add_btn);
         sessionRecycler = findViewById(R.id.vertical_Seesion);
         swipeRefreshLayout = findViewById(R.id.swipeLayout);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,allocationnamelist);
+        autoSuggestion.setAdapter(adapter);
+
+
 
         getAllocationName();
         progressDialog = new ProgressDialog(this);
@@ -79,17 +91,17 @@ public class AddPersonName extends AppCompatActivity {
             }
         });
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                username = spinner.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+////                username = spinner.getSelectedItem().toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         personNameAdapter = new PersonNameAdapter(sessionlist, this);
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
@@ -100,6 +112,7 @@ public class AddPersonName extends AppCompatActivity {
     }
 
     private void InsertData() {
+        username = autoSuggestion.getText().toString().trim();
         progressDialog.setMessage("Please wait...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
@@ -114,6 +127,7 @@ public class AddPersonName extends AppCompatActivity {
                     String message = c.getString("message");
                     Toast.makeText(AddPersonName.this, message, Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
+                    autoSuggestion.setText("");
                     getSessionName();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -150,7 +164,7 @@ public class AddPersonName extends AppCompatActivity {
                         String name = c.getString("name");
                         allocationnamelist.add(name);
                     }
-                    spinner.setAdapter(new ArrayAdapter<>(AddPersonName.this, android.R.layout.simple_spinner_dropdown_item, allocationnamelist));
+//                    spinner.setAdapter(new ArrayAdapter<>(AddPersonName.this, android.R.layout.simple_spinner_dropdown_item, allocationnamelist));
                     personNameAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();

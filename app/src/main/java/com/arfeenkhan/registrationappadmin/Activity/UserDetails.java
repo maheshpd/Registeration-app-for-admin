@@ -61,7 +61,7 @@ public class UserDetails extends AppCompatActivity {
 
     ///////Start Widget
     private EditText edt_id, edt_name, edt_phone;
-    private Button btn_submit, addSessionName, btnallocationname;
+    private Button btn_submit, addSessionName, btnallocationname, newRegister;
     private String sid, sname, sphone;
     private ProgressDialog progressDialog;
     RecyclerView eventPeople;
@@ -119,6 +119,7 @@ public class UserDetails extends AppCompatActivity {
         placename = findViewById(R.id.txt_place_name);
         barcode_btn = findViewById(R.id.barcode_btn);
         swipeRefreshLayout = findViewById(R.id.swipeLayout);
+        newRegister = findViewById(R.id.newRegister);
 
         eventPeople = findViewById(R.id.eventpeople);
         adapter = new RecentAdapter(record, this);
@@ -133,6 +134,13 @@ public class UserDetails extends AppCompatActivity {
             public void onRefresh() {
                 SingleData();
                 swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        newRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserDetails.this, NewRegister.class));
             }
         });
 
@@ -167,17 +175,21 @@ public class UserDetails extends AppCompatActivity {
                 sphone = edt_phone.getText().toString();
                 Log.d(TAG, "Session Value " + Common.sessionValue);
                 if (TextUtils.isEmpty(sid)) {
-                    Toast.makeText(UserDetails.this, "Enter id", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserDetails.this, "Enter deleteId", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(sname)) {
                     Toast.makeText(UserDetails.this, "Enter name", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(sphone)) {
                     Toast.makeText(UserDetails.this, "Enter phoneno", Toast.LENGTH_SHORT).show();
                 } else {
-                    progressDialog.setMessage("Please wait...");
-                    progressDialog.setCanceledOnTouchOutside(false);
-                    progressDialog.show();
+                    if (sname.equals("null") && sphone.equals("null")) {
+                        Toast.makeText(UserDetails.this, "Enter valid name and phone number", Toast.LENGTH_SHORT).show();
+                    } else {
+                        progressDialog.setMessage("Please wait...");
+                        progressDialog.setCanceledOnTouchOutside(false);
+                        progressDialog.show();
 
-                    getAllocationNum();
+                        getAllocationNum();
+                    }
                 }
             }
         });

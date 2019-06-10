@@ -110,7 +110,7 @@ public class SelectTag extends AppCompatActivity {
 //                        for (int j = 0; j < jsonArray1.length(); j++) {
 //                            JSONObject jsonObject2 = jsonArray1.getJSONObject(j);
 //                            String sessionname = jsonObject2.getString("name");
-//                            SessionNameModel sessionNameModel = new SessionNameModel("id", sessionname);
+//                            SessionNameModel sessionNameModel = new SessionNameModel("deleteId", sessionname);
 //                            sessionlist.add(sessionNameModel);
 //                        }
 //
