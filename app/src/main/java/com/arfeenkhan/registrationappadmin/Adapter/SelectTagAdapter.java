@@ -38,8 +38,8 @@ import java.util.Map;
 public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagViewHolder> {
     Context ctx;
     ArrayList<SelectTagModel> list;
-    String updateurl = "http://magicconversion.com/barcodescanner/updatetagdata.php";
-    String resetUrl = "http://magicconversion.com/barcodescanner/restallocation.php";
+    String updateurl = "http://167.71.229.74/barcodescanner/updatetagdata.php";
+    String resetUrl = "http://167.71.229.74/barcodescanner/restallocation.php";
     ArrayList<SessionNameModel> sessionlist = new ArrayList<>();
     StringRequest sessionrequest1;
     String yes;

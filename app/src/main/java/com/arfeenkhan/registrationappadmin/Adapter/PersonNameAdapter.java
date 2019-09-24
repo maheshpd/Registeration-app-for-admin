@@ -40,9 +40,9 @@ public class PersonNameAdapter extends RecyclerView.Adapter<PersonNameAdapter.Pe
     Context context;
     private int highlightItem = 0;
     Dialog edtDialog;
-    String delete_allocation_name = "http://magicconversion.com/barcodescanner/deleteAllocationName.php";
+    String delete_allocation_name = "http://167.71.229.74/barcodescanner/deleteAllocationName.php";
 
-    String update_allocation_name = "http://magicconversion.com/barcodescanner/update1.php";
+    String update_allocation_name = "http://167.71.229.74/barcodescanner/update1.php";
     EditText username;
     Button updateBtn;
 
