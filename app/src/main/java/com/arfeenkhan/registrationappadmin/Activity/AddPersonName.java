@@ -33,7 +33,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-mahesh
 public class AddPersonName extends AppCompatActivity {
     private Spinner spinner;
     String insert_session_name = "http://167.71.229.74/barcodescanner/insert_session_name.php";

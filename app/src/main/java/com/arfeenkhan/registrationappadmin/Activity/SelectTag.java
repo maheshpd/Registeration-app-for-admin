@@ -38,7 +38,7 @@ public class SelectTag extends AppCompatActivity {
     ArrayList<SelectTagModel> taglist;
     SelectTagAdapter tagAdapter;
 
-    String data_url = "http://magicconversion.com/barcodescanner/tagdata.php";
+    String data_url = "http://167.71.229.74/barcodescanner/tagdata.php";
 
     StringRequest request;
     ProgressDialog progressDialog;

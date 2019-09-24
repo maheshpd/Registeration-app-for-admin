@@ -127,7 +127,7 @@ public class SelectTagAdapter extends RecyclerView.Adapter<SelectTagAdapter.TagV
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        notifyDataSetChanged();
                         yes = "True";
                         UpdateView();
                     }

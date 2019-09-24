@@ -60,7 +60,7 @@ public class PersonNameAdapter extends RecyclerView.Adapter<PersonNameAdapter.Pe
     }
 
     @Override
-    public void onBindViewHolder(final PeopleViewHolder holder, int position) {
+    public void onBindViewHolder(final PeopleViewHolder holder, final int position) {
         final SessionNameModel ssm = list.get(position);
         holder.txtName.setText(ssm.getName());
 
@@ -99,6 +99,8 @@ public class PersonNameAdapter extends RecyclerView.Adapter<PersonNameAdapter.Pe
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        list.remove(position);
+                        notifyDataSetChanged();
                         delete();
                     }
                 });
