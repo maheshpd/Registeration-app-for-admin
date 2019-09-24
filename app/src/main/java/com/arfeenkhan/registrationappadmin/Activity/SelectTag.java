@@ -87,7 +87,7 @@ public class SelectTag extends AppCompatActivity {
 //        progressDialog.setCanceledOnTouchOutside(false);
 //        progressDialog.show();
 //        taglist.clear();
-//        String url = "http://magicconversion.com/barcodescanner/innerjoin.php";
+//        String url = "http://167.71.229.74/barcodescanner/innerjoin.php";
 //        RequestQueue queue = Volley.newRequestQueue(this);
 //
 //        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

@@ -36,8 +36,8 @@ public class NewRegister extends AppCompatActivity {
     String sname, semail, sphone;
     ProgressDialog dialog;
     StringRequest sessionrequest;
-    String allocationNum = "http://magicconversion.com/barcodescanner/getallocation.php";
-    String sessionUrl = "http://magicconversion.com/barcodescanner/getSessionName.php";
+    String allocationNum = "http://167.71.229.74/barcodescanner/getallocation.php";
+    String sessionUrl = "http://167.71.229.74/barcodescanner/getSessionName.php";
     ArrayList<String> sessionlist = new ArrayList<>();
 
     @Override
@@ -86,7 +86,7 @@ public class NewRegister extends AppCompatActivity {
 
     private void uploadFile() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String newRegisterUrl = "http://magicconversion.com/barcodescanner/getregister.php";
+        String newRegisterUrl = "http://167.71.229.74/barcodescanner/getregister.php";
         StringRequest sr = new StringRequest(Request.Method.POST, newRegisterUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

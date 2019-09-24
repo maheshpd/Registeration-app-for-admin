@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     //    private JsonArrayRequest data_request;
     private StringRequest data_request;
-    String data_url = "http://magicconversion.com/barcodescanner/tagdata.php";
-    String insert_data_into_bluehost = "http://magicconversion.com/barcodescanner/barcodeinsert.php";
-    String getdatafromInfusionUrl = "http://magicconversion.com/barcodescanner/getcontact.php";
-    String sessionUrl = "http://magicconversion.com/barcodescanner/getSessionName.php";
+    String data_url = "http://167.71.229.74/barcodescanner/tagdata.php";
+    String insert_data_into_bluehost = "http://167.71.229.74/barcodescanner/barcodeinsert.php";
+    String getdatafromInfusionUrl = "http://167.71.229.74/barcodescanner/getcontact.php";
+    String sessionUrl = "http://167.71.229.74/barcodescanner/getSessionName.php";
     //current Time
     String timeStamp;
 

@@ -37,7 +37,7 @@ public class CityName extends AppCompatActivity {
     ProgressDialog progressDialog;
 
 
-    String getCity_url = "http://magicconversion.com/barcodescanner/selectcity.php";
+    String getCity_url = "http://167.71.229.74/barcodescanner/selectcity.php";
 
     CheckInternet checkInternet;
 

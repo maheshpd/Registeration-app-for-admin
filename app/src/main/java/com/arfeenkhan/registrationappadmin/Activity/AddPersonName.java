@@ -36,7 +36,7 @@ import java.util.Map;
 
 public class AddPersonName extends AppCompatActivity {
     private Spinner spinner;
-    String insert_session_name = "http://magicconversion.com/barcodescanner/insert_session_name.php";
+    String insert_session_name = "http://167.71.229.74/barcodescanner/insert_session_name.php";
     Button add;
     String username;
     ProgressDialog progressDialog;
@@ -45,8 +45,8 @@ public class AddPersonName extends AppCompatActivity {
     public static PersonNameAdapter personNameAdapter;
 
     RecyclerView sessionRecycler;
-    String sessionUrl = "http://magicconversion.com/barcodescanner/getSessionName.php";
-    String  allocationnameUrl = "http://magicconversion.com/barcodescanner/getAllocationName.php";
+    String sessionUrl = "http://167.71.229.74/barcodescanner/getSessionName.php";
+    String  allocationnameUrl = "http://167.71.229.74/barcodescanner/getAllocationName.php";
     SwipeRefreshLayout swipeRefreshLayout;
     ArrayList<String> allocationnamelist = new ArrayList<>();
 

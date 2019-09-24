@@ -67,11 +67,11 @@ public class UserDetails extends AppCompatActivity {
     RecyclerView eventPeople;
     ////end Widget
 
-    public static String user_details_url = "http://magicconversion.com/barcodescanner/eventpeopleinsert.php";
-    String sessionUrl = "http://magicconversion.com/barcodescanner/getSessionName.php";
-    public static String singleCoachDataUrl = "http://magicconversion.com/barcodescanner/singleuserdata.php";
-    String getdatafromInfusionUrl = "http://magicconversion.com/barcodescanner/getcontact.php";
-    String allocationNum = "http://magicconversion.com/barcodescanner/getallocation.php";
+    public static String user_details_url = "http://167.71.229.74/barcodescanner/eventpeopleinsert.php";
+    String sessionUrl = "http://167.71.229.74/barcodescanner/getSessionName.php";
+    public static String singleCoachDataUrl = "http://167.71.229.74/barcodescanner/singleuserdata.php";
+    String getdatafromInfusionUrl = "http://167.71.229.74/barcodescanner/getcontact.php";
+    String allocationNum = "http://167.71.229.74/barcodescanner/getallocation.php";
     StringRequest sessionrequest, request;
     ArrayList<String> sessionlist = new ArrayList<>();
     public static ArrayList<SignleCoachDataModel> record = new ArrayList<>();

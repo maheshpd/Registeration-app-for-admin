@@ -36,8 +36,8 @@ public class SingleCoachData extends AppCompatActivity {
 
     //    private RecyclerView singleCoachData;
     private TextView textView;
-    private String singleCoachDataUrl = "http://magicconversion.com/barcodescanner/singleuserdata.php";
-    String deleteEventPeople = "http://magicconversion.com/barcodescanner/deleteEventPeople.php";
+    private String singleCoachDataUrl = "http://167.71.229.74/barcodescanner/singleuserdata.php";
+    String deleteEventPeople = "http://167.71.229.74/barcodescanner/deleteEventPeople.php";
     private SingleCoachDataAdapter adapter;
     private ArrayList<SignleCoachDataModel> list = new ArrayList<>();
     ProgressDialog mdialog;
